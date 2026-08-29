@@ -3,170 +3,249 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Prijava kvara i servisni nalozi za UGO opremu." />
-  <title>UGO Servis | Prijava kvara</title>
+  <meta name="description" content="Prijava kvarova i upravljanje servisnim nalozima za UGO opremu." />
+  <meta name="theme-color" content="#0f5bd8" />
+  <title>UGO Servis | Servisni nalozi</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#" aria-label="UGO Servis početna">
+    <a class="brand" href="#" aria-label="UGO Servis početna" data-go-request>
       <span class="brand-mark">U</span>
       <span>
         <strong>UGO Servis</strong>
-        <small>Prijava kvara</small>
+        <small>Servis ugostiteljske opreme</small>
       </span>
     </a>
+
     <nav class="nav-tabs" aria-label="Glavna navigacija">
-      <button class="nav-tab active" data-view="request">Nova prijava</button>
-      <button class="nav-tab" data-view="orders">Servisni nalozi <span id="orderCount" class="count">0</span></button>
+      <button class="nav-tab active" data-view="request" type="button">
+        <span>＋</span> Nova prijava
+      </button>
+      <button class="nav-tab" data-view="orders" type="button">
+        Servisni nalozi <span id="orderCount" class="count">0</span>
+      </button>
     </nav>
   </header>
 
   <main class="container">
     <section id="requestView" class="view active">
       <div class="hero">
-        <div>
-          <span class="eyebrow">Brza prijava servisa</span>
-          <h1>Što nije u redu s opremom?</h1>
-          <p>Upišite podatke o uređaju i opišite problem. Serviser će dobiti sve potrebne informacije za pripremu dolaska.</p>
+        <div class="hero-copy">
+          <span class="eyebrow">Brza online prijava</span>
+          <h1>Prijavite kvar UGO opreme u nekoliko koraka.</h1>
+          <p>Pošaljite podatke o uređaju, lokaciji i problemu kako bi se serviser mogao bolje pripremiti prije dolaska.</p>
+          <div class="hero-points">
+            <span>✓ Jednostavna prijava</span>
+            <span>✓ Broj servisnog naloga</span>
+            <span>✓ Praćenje statusa</span>
+          </div>
         </div>
-        <div class="hero-badge">
-          <span>⚙️</span>
+        <aside class="hero-panel" aria-label="Podržana oprema">
+          <div class="hero-icon">⚙</div>
           <strong>UGO oprema</strong>
-          <small>hladna • topla • barska</small>
-        </div>
+          <p>Hladna, topla, barska i ostala profesionalna ugostiteljska oprema.</p>
+          <div class="availability-dot"><span></span> Prijava dostupna 0–24</div>
+        </aside>
       </div>
 
-      <form id="serviceForm" class="service-form">
-        <section class="card">
-          <div class="card-heading">
-            <span class="step">1</span>
-            <div>
-              <h2>Kontakt podaci</h2>
-              <p>Koga servis može kontaktirati?</p>
+      <div class="form-layout">
+        <form id="serviceForm" class="service-form">
+          <section class="card form-card">
+            <div class="card-heading">
+              <span class="step">1</span>
+              <div>
+                <h2>Kontakt podaci</h2>
+                <p>Podaci osobe koju servis može kontaktirati.</p>
+              </div>
             </div>
-          </div>
 
-          <div class="grid two">
-            <label>
-              Ime i prezime <span>*</span>
-              <input name="customerName" type="text" autocomplete="name" required placeholder="npr. Ivan Horvat" />
-            </label>
-            <label>
-              Naziv objekta / firme
-              <input name="company" type="text" autocomplete="organization" placeholder="npr. Bistro Centar" />
-            </label>
-            <label>
-              Telefon <span>*</span>
-              <input name="phone" type="tel" autocomplete="tel" required placeholder="npr. 091 234 5678" />
-            </label>
-            <label>
-              E-mail
-              <input name="email" type="email" autocomplete="email" placeholder="npr. servis@firma.hr" />
-            </label>
-          </div>
-        </section>
-
-        <section class="card">
-          <div class="card-heading">
-            <span class="step">2</span>
-            <div>
-              <h2>Oprema</h2>
-              <p>Koji uređaj treba servis?</p>
+            <div class="grid two">
+              <label>
+                Ime i prezime <span>*</span>
+                <input name="customerName" type="text" autocomplete="name" required placeholder="npr. Ivan Horvat" />
+              </label>
+              <label>
+                Naziv objekta / firme
+                <input name="company" type="text" autocomplete="organization" placeholder="npr. Bistro Centar" />
+              </label>
+              <label>
+                Telefon <span>*</span>
+                <input name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="npr. 091 234 5678" />
+              </label>
+              <label>
+                E-mail
+                <input name="email" type="email" autocomplete="email" inputmode="email" placeholder="npr. servis@firma.hr" />
+              </label>
             </div>
-          </div>
+          </section>
 
-          <div class="grid two">
-            <label>
-              Vrsta opreme <span>*</span>
-              <select name="equipmentType" required>
-                <option value="">Odaberite vrstu</option>
-                <option>Hladnjak / rashladni stol</option>
-                <option>Zamrzivač</option>
-                <option>Ledomat</option>
-                <option>Perilica posuđa / čaša</option>
-                <option>Konvektomat / pećnica</option>
-                <option>Štednjak / ploča za kuhanje</option>
-                <option>Friteza</option>
-                <option>Aparat za kavu</option>
-                <option>Napa / ventilacija</option>
-                <option>Ostala UGO oprema</option>
-              </select>
-            </label>
-            <label>
-              Proizvođač i model
-              <input name="model" type="text" placeholder="npr. Electrolux XYZ" />
-            </label>
-            <label>
-              Serijski broj
-              <input name="serialNumber" type="text" placeholder="Ako je poznat" />
-            </label>
-            <label>
-              Lokacija uređaja <span>*</span>
-              <input name="location" type="text" required placeholder="Adresa objekta" />
-            </label>
-          </div>
-        </section>
-
-        <section class="card">
-          <div class="card-heading">
-            <span class="step">3</span>
-            <div>
-              <h2>Opis problema</h2>
-              <p>Što detaljnije opišite kvar.</p>
+          <section class="card form-card">
+            <div class="card-heading">
+              <span class="step">2</span>
+              <div>
+                <h2>Podaci o opremi</h2>
+                <p>Što točniji podaci olakšavaju pripremu servisa.</p>
+              </div>
             </div>
-          </div>
 
-          <label>
-            Problem <span>*</span>
-            <textarea name="problem" rows="6" required placeholder="Primjer: Hladnjak radi, ali temperatura ne pada ispod 12 °C. Problem se pojavio jutros..."></textarea>
-          </label>
+            <div class="grid two">
+              <label>
+                Vrsta opreme <span>*</span>
+                <select name="equipmentType" required>
+                  <option value="">Odaberite vrstu</option>
+                  <option>Hladnjak / rashladni stol</option>
+                  <option>Zamrzivač</option>
+                  <option>Ledomat</option>
+                  <option>Perilica posuđa / čaša</option>
+                  <option>Konvektomat / pećnica</option>
+                  <option>Štednjak / ploča za kuhanje</option>
+                  <option>Friteza</option>
+                  <option>Aparat za kavu</option>
+                  <option>Napa / ventilacija</option>
+                  <option>Ostala UGO oprema</option>
+                </select>
+              </label>
+              <label>
+                Proizvođač i model
+                <input name="model" type="text" placeholder="npr. Electrolux XYZ" />
+              </label>
+              <label>
+                Serijski broj
+                <input name="serialNumber" type="text" placeholder="Ako je poznat" />
+              </label>
+              <label>
+                Lokacija uređaja <span>*</span>
+                <input name="location" type="text" autocomplete="street-address" required placeholder="Adresa objekta" />
+              </label>
+            </div>
+          </section>
 
-          <div class="grid two compact-top">
+          <section class="card form-card">
+            <div class="card-heading">
+              <span class="step">3</span>
+              <div>
+                <h2>Opis kvara</h2>
+                <p>Opišite što se događa i kada je problem počeo.</p>
+              </div>
+            </div>
+
             <label>
-              Hitnost
-              <select name="priority">
-                <option value="Normalno">Normalno</option>
-                <option value="Hitno">Hitno — oprema ne radi</option>
-                <option value="Kritično">Kritično — rad objekta je ugrožen</option>
-              </select>
+              Problem <span>*</span>
+              <textarea name="problem" rows="6" maxlength="1200" required placeholder="Primjer: Hladnjak radi, ali temperatura ne pada ispod 12 °C. Problem se pojavio jutros..."></textarea>
+              <small class="field-help"><span id="problemCount">0</span>/1200 znakova</small>
             </label>
-            <label>
-              Željeni termin
-              <input name="preferredDate" type="date" />
-            </label>
-          </div>
-        </section>
 
-        <div class="form-footer">
-          <p><strong>*</strong> Obavezna polja. Podaci se u ovoj demo verziji spremaju samo na ovom uređaju.</p>
-          <button class="primary-btn" type="submit">Pošalji prijavu servisa</button>
-        </div>
-      </form>
+            <div class="grid two compact-top">
+              <label>
+                Hitnost
+                <select name="priority">
+                  <option value="Normalno">Normalno</option>
+                  <option value="Hitno">Hitno — oprema ne radi</option>
+                  <option value="Kritično">Kritično — rad objekta je ugrožen</option>
+                </select>
+              </label>
+              <label>
+                Željeni termin
+                <input name="preferredDate" type="date" />
+              </label>
+            </div>
+
+            <label class="upload-box" for="faultPhoto">
+              <span class="upload-icon">▣</span>
+              <span>
+                <strong>Dodajte fotografiju kvara</strong>
+                <small id="photoLabel">JPG, PNG ili WEBP do 1,5 MB</small>
+              </span>
+              <input id="faultPhoto" name="faultPhoto" type="file" accept="image/jpeg,image/png,image/webp" />
+            </label>
+            <img id="photoPreview" class="photo-preview" alt="Pregled fotografije kvara" hidden />
+          </section>
+
+          <div class="form-footer">
+            <p><strong>*</strong> Obavezna polja. Demo podaci ostaju samo u ovom pregledniku.</p>
+            <button class="primary-btn" type="submit">Pošalji servisni zahtjev <span>→</span></button>
+          </div>
+        </form>
+
+        <aside class="help-card">
+          <span class="help-icon">i</span>
+          <h3>Što je korisno napisati?</h3>
+          <ul>
+            <li>Što uređaj radi ili ne radi</li>
+            <li>Prikazuje li grešku ili alarm</li>
+            <li>Kada je kvar prvi put primijećen</li>
+            <li>Je li uređaj potpuno izvan funkcije</li>
+          </ul>
+          <p>Fotografija uređaja ili oznake modela može dodatno pomoći serviseru.</p>
+        </aside>
+      </div>
     </section>
 
     <section id="ordersView" class="view">
       <div class="orders-header">
         <div>
-          <span class="eyebrow">Servis</span>
-          <h1>Zaprimljene prijave</h1>
-          <p>Pregled prijavljenih kvarova na ovom uređaju.</p>
+          <span class="eyebrow">Servisni pregled</span>
+          <h1>Servisni nalozi</h1>
+          <p>Pregledajte prijave, pronađite korisnika i ažurirajte tijek popravka.</p>
         </div>
-        <button id="clearOrders" class="ghost-btn" type="button">Obriši demo podatke</button>
+        <button id="newOrderButton" class="primary-btn small-btn" type="button">＋ Nova prijava</button>
       </div>
 
-      <div class="status-filters" aria-label="Filtriraj naloge">
-        <button class="filter active" data-filter="Sve">Sve</button>
-        <button class="filter" data-filter="Novo">Novo</button>
-        <button class="filter" data-filter="U obradi">U obradi</button>
-        <button class="filter" data-filter="Završeno">Završeno</button>
+      <div class="stats-grid">
+        <article class="stat-card">
+          <span>Ukupno naloga</span>
+          <strong id="statTotal">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Novi</span>
+          <strong id="statNew">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>U obradi</span>
+          <strong id="statWorking">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Hitni / kritični</span>
+          <strong id="statUrgent">0</strong>
+        </article>
       </div>
 
+      <section class="card toolbar-card" aria-label="Pretraga i filteri">
+        <div class="search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="orderSearch" type="search" placeholder="Pretraži po nalogu, korisniku, firmi, opremi ili lokaciji..." />
+        </div>
+        <select id="priorityFilter" aria-label="Filtriraj po hitnosti">
+          <option value="Sve">Sve hitnosti</option>
+          <option value="Normalno">Normalno</option>
+          <option value="Hitno">Hitno</option>
+          <option value="Kritično">Kritično</option>
+        </select>
+        <select id="sortOrders" aria-label="Sortiranje naloga">
+          <option value="newest">Najnoviji prvo</option>
+          <option value="oldest">Najstariji prvo</option>
+          <option value="priority">Najhitniji prvo</option>
+        </select>
+      </section>
+
+      <div class="status-row">
+        <div class="status-filters" aria-label="Filtriraj naloge po statusu">
+          <button class="filter active" data-filter="Sve" type="button">Sve</button>
+          <button class="filter" data-filter="Novo" type="button">Novo</button>
+          <button class="filter" data-filter="U obradi" type="button">U obradi</button>
+          <button class="filter" data-filter="Završeno" type="button">Završeno</button>
+        </div>
+        <button id="clearOrders" class="danger-link" type="button">Obriši sve demo podatke</button>
+      </div>
+
+      <div id="resultsInfo" class="results-info"></div>
       <div id="ordersList" class="orders-list"></div>
+
       <div id="emptyState" class="empty-state">
         <span>🧰</span>
-        <h2>Još nema servisnih prijava</h2>
-        <p>Kada korisnik pošalje prijavu kvara, pojavit će se ovdje.</p>
+        <h2 id="emptyTitle">Još nema servisnih prijava</h2>
+        <p id="emptyText">Kada korisnik pošalje prijavu kvara, pojavit će se ovdje.</p>
         <button class="primary-btn" data-go-request type="button">Napravi prvu prijavu</button>
       </div>
     </section>
